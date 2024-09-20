@@ -1,7 +1,8 @@
 //This is where the post requests go because post requests can't be in python, and they
 // Need to be in javascript
+console.log("hi")
 
-
+import { Route } from "next";
 // This is for giving the next response 
 import { NextResponse } from "next/server";
 // import open ai
@@ -15,7 +16,7 @@ const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job 
 // This is the post request for Chat GPT to access the fronted server
 // Exports the function to the frontend
 // the req is request
-export async function POST(req:any) {
+export async function POST(req: any) {
     // Makes an istance of OPENAI
     const openai = new OpenAI();
     // Sets the data to be the request json
@@ -27,7 +28,7 @@ export async function POST(req:any) {
         // This gives the system prompt and any qestions after it.
         messages:[{role:'system', content:sysPrompt}, ...data],
         // Sets the model
-        model: 'gpt-4o',
+        model: 'gpt-4o-mini',
         // This is so it will look like one of those video game text bubles
         stream: true,
     });

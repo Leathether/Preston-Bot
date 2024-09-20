@@ -4,6 +4,7 @@ import { useState } from 'react';
 //Imports the SysMessage react element from the systemMessage Folder
 // This is the chat bubbles TSX class
 import SysMessage from './systemMessage/default';
+// Import the GPT Backend
 //import SysMessage from '@/elements/systemMessage/default.tsx';
 //Exports a JSX Element because this is the landing page. 
 export default function Home(): JSX.Element {
@@ -27,14 +28,14 @@ export default function Home(): JSX.Element {
       //Older messages
       ...messages,
       //New user message
-      {role:'user', content:'message'},
+      {role:'user', content:message},
       //New system message
       {role: 'system', content:''},
     ]);
     //This POST request talks to the local server that talks with the cloud compute
     //OPENAI server that is run by open AI
     //There is a lot going on in this API call
-    const response = fetch('../api/chat', {
+    const response = fetch("/api/chat", {
       //Makes it a post request
       method:'POST',
       // Stores the response in a MongoDB/ JSON format
