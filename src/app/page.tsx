@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
     //This POST request talks to the local server that talks with the cloud compute
     //OPENAI server that is run by open AI
     //There is a lot going on in this API call
-    const response = fetch('@/api/chat', {
+    const response = fetch('../api/chat', {
       //Makes it a post request
       method:'POST',
       // Stores the response in a MongoDB/ JSON format
