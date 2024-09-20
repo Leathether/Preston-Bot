@@ -3,7 +3,7 @@
 
 
 // This is for giving the next response 
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
 

@@ -27,9 +27,10 @@ export default class SysMessage {
     //Did not know the data types, so used any
     public displayMessage(this:any):any {
         //if the role is 'user', the styling will be different
+        console.log(this.user)
         if (this.role === 'user'){
             return (
-                <section className="bg-blue-900 rounded-full border-8 content-center w-fit h-fit p-4 rounded-tr-none" key={this.key}>
+                <section className="bg-blue-900 rounded-full border-2 border-black content-center w-fit h-fit p-4 rounded-tr-none justify-self-end" key={this.key}>
                     <p className="text-white">{this.message}</p>
                 </section>
             )
@@ -37,7 +38,7 @@ export default class SysMessage {
         //if the role is 'system', the styling will be different
         else if (this.role === 'system'){
             return (
-                <section className="bg-slate-200 rounded-full border-8 h-fit p-4 flex content-center grow-0 w-fit rounded-tl-none" key={this.key}>
+                <section className="bg-slate-200 rounded-full border-2 border-black h-fit p-4 flex content-center grow-0 w-fit rounded-tl-none" key={this.key}>
                     <p className="text-black">{this.message}</p>
                 </section>
             )
