@@ -106,7 +106,8 @@ export default function Home(): JSX.Element {
           })}
           </section>
         <footer className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8">
-          <input className="bg-white rounded-full h-16 w-3/4 pl-6 text-xl"></input>
+          <button className="bg-slate-700 w-16 h-16 rounded-2xl mr-52 justify-self-start" onClick={sendMessage}></button>
+          <input className="bg-white rounded-full h-16 w-3/4 pl-6 text-xl" onChange={(e) => setMessage(e.target.value)}></input>
         </footer>
       </section>
     </div>
