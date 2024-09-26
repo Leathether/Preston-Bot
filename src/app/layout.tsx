@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <header className="bg-cyan-900 w-screen h-32 flex flex-row content-center place-items-center">
+      <header className="bg-cyan-900 w-screen h-[14vh] flex flex-row content-center place-items-center">
         <Image src={Professor} alt="professor" width="100"className="w-32"></Image>
         <h1 className="font-mono ml-16 text-white text-4xl">Lingustics Chatbot</h1>
       </header>

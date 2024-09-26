@@ -30,7 +30,7 @@ export default class SysMessage {
         console.log(this.user)
         if (this.role === 'user'){
             return (
-                <section className="bg-blue-900 rounded-full border-2 border-black content-center w-fit h-fit p-4 rounded-tr-none justify-self-end" key={this.key}>
+                <section className="bg-blue-900 rounded-full border-2 border-black content-center w-fit h-fit p-4 rounded-tr-none ml-auto justify-self-end mb-5" key={this.key}>
                     <p className="text-white">{this.message}</p>
                 </section>
             )
@@ -38,7 +38,7 @@ export default class SysMessage {
         //if the role is 'system', the styling will be different
         else if (this.role === 'system'){
             return (
-                <section className="bg-slate-200 rounded-full border-2 border-black h-fit p-4 flex content-center grow-0 w-fit rounded-tl-none" key={this.key}>
+                <section className="bg-slate-200 rounded-full border-2 border-black h-fit p-4 flex content-center w-fit rounded-tl-none mb-5" key={this.key}>
                     <p className="text-black">{this.message}</p>
                 </section>
             )

@@ -4,9 +4,10 @@ console.log("hi")
 
 import { Route } from "next";
 // This is for giving the next response 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
+import { JSONSchemaObject, JSONSchemaType } from "openai/lib/jsonschema.mjs";
 
 
 // this is the preprompt
@@ -16,12 +17,13 @@ const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job 
 // This is the post request for Chat GPT to access the fronted server
 // Exports the function to the frontend
 // the req is request
-export async function POST(req: any) {
+export async function POST(req:any) {
     // Makes an istance of OPENAI
     const openai = new OpenAI();
     // Sets the data to be the request json
-    const data = await req.json();
+    const data:any = req.json
 
+    console.log(data.json)
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
@@ -29,9 +31,9 @@ export async function POST(req: any) {
         messages:[{role:'system', content:sysPrompt}, ...data],
         // Sets the model
         model: 'gpt-4o-mini',
-        // This is so it will look like one of those video game text bubles
         stream: true,
     });
+    
 
     //This is to make the responses
     const stream = new ReadableStream({

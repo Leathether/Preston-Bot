@@ -1,6 +1,6 @@
 
 'use client'
-import { useState } from 'react';
+import { JSXElementConstructor, useState } from 'react';
 //Imports the SysMessage react element from the systemMessage Folder
 // This is the chat bubbles TSX class
 import SysMessage from './systemMessage/default';
@@ -21,6 +21,7 @@ export default function Home(): JSX.Element {
   //Handles talking to the chat GPT wrapper on the backend and this 
   //basiclly handles sending all of the messages and communicating with the server.
   const sendMessage = async () => {
+    console.log(message)
     // Makes the input box blank
     setMessage('')
     // adds a new message to the stream of messages.
@@ -42,12 +43,14 @@ export default function Home(): JSX.Element {
       headers: {
         'Content-Type': 'application/json',
       },
+      
       //Appends the message to the old string of messages that is the user message.
-      body: JSON.stringify([...messages, {role: 'user', content:message}])
+      body: JSON.stringify([...messages, {role: 'user', content:message}]),
       // This happens after the user message has been sent to the server, and
       // The message from the server has been put out to the frontend.
       // res means response, but I don't know the exact type, so I put any.
-    }).then(async(res:any) => {
+    },
+    ).then(async(res:any) => {
       // gets the body of the response and gets a reader to read it soon.
       const reader = res.body.getReader();
       // This is for decoding it, so it gives out messages like a video game
@@ -91,25 +94,28 @@ export default function Home(): JSX.Element {
 
   return (
     //Can't comment in the divs
-    <div className="h-screen flex flex-col bg-slate-200 ronder-xl border-4 items-center">
-      <section className="w-2/3 bg-white flex z-5 rounded-3xl border-4 h-full mt-8 flex flex-col">
+    <div className="h-5/6 flex flex-col bg-slate-200 ronder-xl border-4 items-center">
+      <section className="w-2/3 bg-white flex z-5 rounded-3xl border-4 h-fit mt-8 flex flex-col">
         <header className="bg-emerald-400 h-20 z-10 w-full rounded-t-3xl content-center">
           <h1 className="font-mono m-4 ml-16 text-white text-3xl ">Chat</h1>
         </header>
-        <section className="flex flex-col bg-inherit h-5/6 m-16">
+        <section className="flex flex-col bg-inherit min-h-[55vh] m-8">
         {
           //retruns the messages
           messages.map((msg: any, idx: number):JSX.Element => {
             const bubble = new SysMessage(msg.role, msg.content, idx);
-
             return (bubble.displayMessage());
 
           })}
           </section>
-        <footer className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8">
-          <button className="bg-slate-700 w-16 h-16 rounded-2xl mr-52 justify-self-start" onClick={sendMessage}></button>
-          <input className="bg-white rounded-full h-16 w-3/4 pl-6 text-xl text-blackg" onChange={(e) => setMessage(e.target.value)}></input>
-        </footer>
+        <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8" onSubmit={sendMessage}>
+          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="submit">
+            <h1 className="font-sans uppercase font-black text-2xl">
+              Send
+            </h1>
+          </button>
+          <input id="messageBar" className="bg-white rounded-full h-16 w-[56vw] pl-6 text-xl text-black" onChange={(e) => setMessage(e.target.value)}></input>
+        </form>
       </section>
     </div>
   )
