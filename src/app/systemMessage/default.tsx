@@ -26,19 +26,18 @@ export default class SysMessage {
     //This is public because the hero page will call this function.
     //Did not know the data types, so used any
     public displayMessage(this:any):any {
-        //if the role is 'user', the styling will be different
-        console.log(this.user)
+        //if the role is 'user', the styling will be differen
         if (this.role === 'user'){
             return (
-                <section className="bg-blue-900 rounded-full border-2 border-black content-center w-fit h-fit p-4 rounded-tr-none justify-self-end" key={this.key}>
+                <section className="bg-blue-900 rounded-full border-2 border-black content-center w-fit h-fit p-4 rounded-tr-none ml-auto justify-self-end mb-5" key={this.key}>
                     <p className="text-white">{this.message}</p>
                 </section>
             )
         }
         //if the role is 'system', the styling will be different
-        else if (this.role === 'system'){
+        else if (this.role === 'assistant'){
             return (
-                <section className="bg-slate-200 rounded-full border-2 border-black h-fit p-4 flex content-center grow-0 w-fit rounded-tl-none" key={this.key}>
+                <section className="bg-slate-200 rounded-full border-2 border-black h-fit p-4 flex content-center w-fit rounded-tl-none mb-5" key={this.key}>
                     <p className="text-black">{this.message}</p>
                 </section>
             )
