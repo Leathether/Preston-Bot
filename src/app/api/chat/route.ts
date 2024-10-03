@@ -1,39 +1,37 @@
 //This is where the post requests go because post requests can't be in python, and they
 // Need to be in javascript
 console.log("hi")
-
-import { Route } from "next";
 // This is for giving the next response 
 import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-import { JSONSchemaObject, JSONSchemaType } from "openai/lib/jsonschema.mjs";
+import { JSONSchemaArray } from "openai/lib/jsonschema.mjs";
 
 
 // this is the preprompt
 const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
 
-
+console.log
 // This is the post request for Chat GPT to access the fronted server
 // Exports the function to the frontend
 // the req is request
-export async function POST(req:any) {
+export async function POST(req:any){
+    // Use request.json() to parse the incoming JSON body
+    const body = await req.json();
+    //console.log(req)
     // Makes an istance of OPENAI
     const openai = new OpenAI();
     // Sets the data to be the request json
-    const data:any = req.json
-
-    console.log(data.json)
+    console.log()
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
         // This gives the system prompt and any qestions after it.
-        messages:[{role:'system', content:sysPrompt}, ...data],
+        messages:[{role:'assistant', content:sysPrompt}, ...body],
         // Sets the model
         model: 'gpt-4o-mini',
         stream: true,
-    });
-    
+    })
 
     //This is to make the responses
     const stream = new ReadableStream({
