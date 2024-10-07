@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   //Gives info about the site
   description: "This is a chatbot that is made to review the lingustics course",
   //Tries to give favicon, but needs fixing
-  icons:"/favicon1.ico"
+  icons:"./favicon.ico"
 };
 
 export default function RootLayout({
