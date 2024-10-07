@@ -12,7 +12,7 @@ export default function Home(): JSX.Element {
     //This is for the first initial message to prompt the user.
     {
       role: 'assistant',
-      content: 'Hello, my name is Professor Preston, and I will help you with your Linguistics Class',
+      content: 'Hello, my name is Professor Preston, and I will help you with your Linguistics Class'
     }
   ]);
   //This is for the latest message
@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
   //basiclly handles sending all of the messages and communicating with the server.
   const sendMessage = async () => {
     console.log(message)
-    if (!message.trim()){ return}    
+    if (!message.trim()){return}    
     // adds a new message to the stream of messages.
     setMessages((messages) => [
       //Older messages
@@ -35,7 +35,7 @@ export default function Home(): JSX.Element {
     //This POST request talks to the local server that talks with the cloud compute
     //OPENAI server that is run by open AI
     //There is a lot going on in this API call
-    const response = fetch('./api/chat', {
+    const response = fetch('/api/chat', {
       //Makes it a post request
       method:"POST",
       // Stores the response in a MongoDB/ JSON format
@@ -44,7 +44,7 @@ export default function Home(): JSX.Element {
       },
 
       //Appends the message to the old string of messages that is the user message.
-      body: JSON.stringify([...messages, { role: 'user', content: message },])
+      body: JSON.stringify([...messages, { role: 'user', content: message }])
       
       
       // This happens after the user message has been sent to the server, and
@@ -113,8 +113,8 @@ export default function Home(): JSX.Element {
 
           })}
           </section>
-        <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8" onSubmit={sendMessage}>
-          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="submit">
+        <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8">
+          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="button" onClick={sendMessage}>
             <h1 className="font-sans uppercase font-black text-2xl">
               Send
             </h1>
