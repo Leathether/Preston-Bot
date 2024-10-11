@@ -5,7 +5,7 @@ console.log("hi")
 import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-import "@/python/embedings.py"
+// imports the vectors for the taining data.
 
 
 // this is the preprompt
@@ -22,10 +22,11 @@ export async function POST(req:any){
     //console.log(req)
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY});
-    const embedding = await openai.embeddings.create({
-        model: "text-embedding-3-small",  // Use the correct model for embeddings
-        input: preTraining,
-      });  
+    const results = await index.query({
+        topK: 5,
+        includeMetadata: true,
+        vector: embeddings.data[0].embedding,
+      });
     // Sets the data to be the request json
     console.log(body)
     console.log(process.env.OPENAI_API_KEY)
