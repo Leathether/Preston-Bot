@@ -5,7 +5,7 @@ console.log("hi")
 import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-import { JSONSchemaArray } from "openai/lib/jsonschema.mjs";
+import "@/python/embedings.py"
 
 
 // this is the preprompt
@@ -18,9 +18,14 @@ console.log
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
     const body = await req.json()
+  
     //console.log(req)
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY});
+    const embedding = await openai.embeddings.create({
+        model: "text-embedding-3-small",  // Use the correct model for embeddings
+        input: preTraining,
+      });  
     // Sets the data to be the request json
     console.log(body)
     console.log(process.env.OPENAI_API_KEY)
