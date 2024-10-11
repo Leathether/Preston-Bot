@@ -3,7 +3,7 @@
 import { JSXElementConstructor, useState } from 'react';
 //Imports the SysMessage react element from the systemMessage Folder
 // This is the chat bubbles TSX class
-import SysMessage from './systemMessage/default';
+import displayMessage from './systemMessage/default';
 // Import the GPT Backend
 //import SysMessage from '@/elements/systemMessage/default.tsx';
 //Exports a JSX Element because this is the landing page. 
@@ -108,8 +108,7 @@ export default function Home(): JSX.Element {
         {
           //retruns the messages
           messages.map((msg: any, idx: number):JSX.Element => {
-            const bubble = new SysMessage(msg.role, msg.content, idx);
-            return (bubble.displayMessage());
+            return (displayMessage(msg.content, msg.role, idx));
 
           })}
           </section>
