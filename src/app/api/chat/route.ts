@@ -5,7 +5,7 @@ console.log("hi")
 import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-import { JSONSchemaArray } from "openai/lib/jsonschema.mjs";
+// imports the vectors for the taining data.
 
 
 // this is the preprompt
@@ -17,12 +17,19 @@ console.log
 // the req is request
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
-    const body = await req.json();
+    const body = await req.json()
+  
     //console.log(req)
     // Makes an istance of OPENAI
-    const openai = new OpenAI();
+    const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY});
+    const results = await index.query({
+        topK: 5,
+        includeMetadata: true,
+        vector: embeddings.data[0].embedding,
+      });
     // Sets the data to be the request json
-    console.log()
+    console.log(body)
+    console.log(process.env.OPENAI_API_KEY)
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
@@ -48,9 +55,9 @@ export async function POST(req:any){
                     // if there is content, then if will spit it out to the forntend
                     if (content) {
                         // this encodes the text in JSON
-                        encoder.encode(content)
+                        const text = encoder.encode(content)
                         // This queues the text, so there is no mess ups
-                        controller.enqueue(Text)
+                        controller.enqueue(text)
                     }
                 }
             } catch (err) {
