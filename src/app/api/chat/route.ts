@@ -10,7 +10,6 @@ import embeddings from "../embeddings/route"
 // This imports the pdf text
 import pdfText from "../pdfText/route"
 
-
 // this is the preprompt
 const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
 
@@ -20,8 +19,10 @@ const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job 
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
     const data = await req.json()
-    let embeddingsJSON = await embeddings.json()
-    console.log(embeddingsJSON)
+    let embeddingsJson = await embeddings.json()
+    let pdfTextJson = await pdfText.json()
+    console.log(pdfTextJson)
+    console.log(embeddingsJson)
   
     //console.log(req)
     // Makes an istance of OPENAI
