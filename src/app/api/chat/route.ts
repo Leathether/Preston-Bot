@@ -5,30 +5,41 @@ console.log("hi")
 import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-import { JSONSchemaArray } from "openai/lib/jsonschema.mjs";
-
+// This imports the embeddings
+import embeddings from "../embeddings/route"
+// This imports the pdf text
+import pdfText from "../pdfText/route"
 
 // this is the preprompt
 const sysPrompt = `Hello, you are a a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
 
-console.log
 // This is the post request for Chat GPT to access the fronted server
 // Exports the function to the frontend
 // the req is request
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
-    const body = await req.json()
+    const data = await req.json()
+    let embeddingsJson = await embeddings.json()
+    let pdfTextJson = await pdfText.json()
+    console.log(pdfTextJson)
+    console.log(embeddingsJson)
+  
     //console.log(req)
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY});
+    //const results = await pdfText.toString.query({
+    //    topK: 5,
+    //    includeMetadata: true,
+    //    vector: embeddings
+    //  });
     // Sets the data to be the request json
-    console.log(body)
+    //console.log(body)
     console.log(process.env.OPENAI_API_KEY)
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
         // This gives the system prompt and any qestions after it.
-        messages:[{role:'assistant', content:sysPrompt}, ...body],
+        messages:[{role:'assistant', content:sysPrompt}, ...data],
         // Sets the model
         model: 'gpt-4o-mini',
         stream: true,
