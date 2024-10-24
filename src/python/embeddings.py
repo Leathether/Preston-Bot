@@ -1,34 +1,25 @@
-from openai import OpenAI
-import pandas as pd
-import os
-from dotenv import load_dotenv, find_dotenv
 import PyPDF2
 
-load_dotenv(find_dotenv())
-key = os.getenv("OPENAI_API_KEY")
 
-print(key)
+# this is to read the pdf file that is passed through it.
+def readPdf(name):
+    pdfFile = PyPDF2.PdfReader(name)
 
-pdfFile = PyPDF2.PdfReader("Syllabus.pdf")
+    words = ""
 
-words = ""
-
-for i in pdfFile.pages:
-    words += i.extract_text()
+    for i in pdfFile.pages:
+        words += i.extract_text()
 
 
-words = words.split("\n")
+    words = words.split("\n")
 
-text = ""
+    text = ""
 
-for i in words:
-    text += i  + " "
+    for i in words:
+        text += i  + " "
 
-print(text)
-
-client = OpenAI(api_key=key)
+    return text
 
 
-embeddings = client.embeddings.create(input=[text], model='text-embedding-3-small').data[0].embedding
-
-print(embeddings)
+syllabusText = readPdf("Syllabus.pdf")
+calenderText = readPdf('calender.pdf')

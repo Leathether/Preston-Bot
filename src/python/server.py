@@ -1,25 +1,24 @@
 # importing flask to give the flask to the user.
 from flask import Flask, jsonify
 from flask_cors import CORS
-from embeddings import embeddings, text
-
+from embeddings import syllabusText, calenderText
 
 # app instance
 app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/api/embeddings", methods=["GET"])
-def return_embeddings():
+@app.route("/api/syllabusText", methods=["GET"])
+def return_syllabusText():
     return jsonify({
-        'pretraining': embeddings
-    })
+        'syllabusText': syllabusText
+        })
 
-@app.route("/api/text", methods=["GET"])
-def return_text():
+@app.route("/api/calenderText", methods=["GET"])
+def return_calenderText():
     return jsonify({
-        'text': text 
-    })
+        'calenderText': calenderText
+        })
 
 
 if __name__ == "__main__":

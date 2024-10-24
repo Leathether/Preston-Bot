@@ -8,7 +8,7 @@ In order to run this with the chatbot working, there are a few steps that must b
 
 1. First, navigate to the "src/python" folder
 
-2. Then do "python -m venv venv" in the terminal to get the virtual environment to be set up
+2. Then do "python -m venv .venv" in the terminal to get the virtual environment to be set up
 
 3. after that do "python3 server.py"
 
@@ -23,5 +23,7 @@ In order to run this with the chatbot working, there are a few steps that must b
 
 
 the API key is stored in the python folder and the root folder to make it easier to access for the python program.
+
+There is also a requirements.txt that has to be installed
 
 
