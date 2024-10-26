@@ -8,11 +8,13 @@ import OpenAI from "openai";
 //import text from "../pdfText/route"
 import { JSONSchemaObject } from "openai/lib/jsonschema.mjs";
 
-let training:any = fetch("http://127.0.0.1:8080/api/calenderText")
+const calender = fetch("http://127.0.0.1:8080/api/calenderText")
+const syllabus = fetch("http://127.0.0.1:8080/api/syllabusText")
 
-console.log(training.calenderText)
+console.log(calender)
+console.log(syllabus)
 // this is the preprompt
-let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it. ${training}`
+let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it. ${calender}`
 
 
 // This is the post request for Chat GPT to access the fronted server
@@ -21,7 +23,7 @@ let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is t
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
     const data = await req.json()
-    
+    const calenderJSON = await calender.json()
 
     console.log(sysPrompt)
     

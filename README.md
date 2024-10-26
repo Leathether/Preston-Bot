@@ -8,7 +8,7 @@ In order to run this with the chatbot working, there are a few steps that must b
 
 1. First, navigate to the "src/python" folder
 
-2. Then do "python -m venv .venv" in the terminal to get the virtual environment to be set up
+2. Then do "source venv/bin/activate" in the terminal to get the virtual environment to be set up
 
 3. after that do "python3 server.py"
 
