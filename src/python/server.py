@@ -8,17 +8,17 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/api/syllabusText", methods=["GET"])
+@app.route("/api/home", methods=["GET"])
 def return_syllabusText():
     return jsonify({
-        'syllabusText': syllabusText
+        'body': [syllabusText, calenderText],
         })
 
-@app.route("/api/calenderText", methods=["GET"])
-def return_calenderText():
-    return jsonify({
-        'calenderText': calenderText
-        })
+##@app.route("/api/calenderText", methods=["GET"])
+##def return_calenderText():
+##    return jsonify({
+##        'body': 
+##        })
 
 
 if __name__ == "__main__":

@@ -5,16 +5,23 @@ import { NextRequest, NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
 // This imports the pdf text
-//import text from "../pdfText/route"
+import text from "../pdfText/route"
+
+//async function text() {
+//    let home = fetch("http://127.0.0.1:8080/api/home")
+//    //sconsole.log(syllabus)
+//    home = await home.json()
+//    const homeBody = JSON.stringify(home.body)
+//    console.log(typeof(homeBody))
+//    return (homeBody)
+//}
 import { JSONSchemaObject } from "openai/lib/jsonschema.mjs";
 
-const calender = fetch("http://127.0.0.1:8080/api/calenderText")
-const syllabus = fetch("http://127.0.0.1:8080/api/syllabusText")
 
-console.log(calender)
-console.log(syllabus)
+//const syllabus = fetch("http://127.0.0.1:8080/api/syllabusText")
+//console.log(syllabus)
 // this is the preprompt
-let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it. ${calender}`
+let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
 
 
 // This is the post request for Chat GPT to access the fronted server
@@ -22,9 +29,16 @@ let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is t
 // the req is request
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
+    const decoder = new TextDecoder()
     const data = await req.json()
-    const calenderJSON = await calender.json()
+    let home = await fetch("http://127.0.0.1:8080/api/home")
+    //sconsole.log(syllabus)
+    home = await home.json()
+    let homeBody = home.body
 
+    //(await syllabus).body
+    sysPrompt = homeBody + sysPrompt
+    
     console.log(sysPrompt)
     
     //console.log(req)
@@ -32,7 +46,6 @@ export async function POST(req:any){
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY})
     // Sets the data to be the request json
     //console.log(body)
-    console.log(process.env.OPENAI_API_KEY)
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
@@ -76,7 +89,6 @@ export async function POST(req:any){
     //This is to send the message from the server to the frontend
     const final = new NextResponse(stream)
     // This is to see if the message generated
-    console.log(final)
     // This completes the post request and it sends it to the frontend
     return(final)
 };
