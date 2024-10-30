@@ -1,25 +1,9 @@
-//This is where the post requests go because post requests can't be in python, and they
-// Need to be in javascript
 // This is for giving the next response 
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
-// This imports the pdf text
-import text from "../pdfText/route"
-
-//async function text() {
-//    let home = fetch("http://127.0.0.1:8080/api/home")
-//    //sconsole.log(syllabus)
-//    home = await home.json()
-//    const homeBody = JSON.stringify(home.body)
-//    console.log(typeof(homeBody))
-//    return (homeBody)
-//}
-import { JSONSchemaObject } from "openai/lib/jsonschema.mjs";
 
 
-//const syllabus = fetch("http://127.0.0.1:8080/api/syllabusText")
-//console.log(syllabus)
 // this is the preprompt
 let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
 
@@ -29,23 +13,23 @@ let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is t
 // the req is request
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
-    const decoder = new TextDecoder()
     const data = await req.json()
+    // This is for the pdf text and all of the training data from the python flask api.
     let home = await fetch("http://127.0.0.1:8080/api/home")
-    //sconsole.log(syllabus)
+
+    // Get the json data from the GET request
     home = await home.json()
+
+    // This gets the body of the data.
     let homeBody = home.body
 
-    //(await syllabus).body
+    // This adds the data to the preprompt
     sysPrompt = homeBody + sysPrompt
     
-    console.log(sysPrompt)
     
-    //console.log(req)
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY})
     // Sets the data to be the request json
-    //console.log(body)
     //This is for the system messages
     //This chunks the data, so it can give that video game esk response
     const completion = await openai.chat.completions.create({
