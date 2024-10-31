@@ -44,13 +44,14 @@ export default function RootLayout({
   //Makes it so this does not change the pages
   children: React.ReactNode;
 }>) {
+  //top bar navigation and display
   return (
-    //top bar navigation and display
+    
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <header className="bg-cyan-900 w-screen h-[14vh] flex flex-row content-center place-items-center">
-        <Image src={Professor} alt="professor" width="100"className="w-32"></Image>
+        <Image src={Professor} alt="professor" width="100" className="w-32"></Image>
         <h1 className="font-mono ml-16 text-white text-4xl">Lingustics Chatbot</h1>
       </header>
         {children}

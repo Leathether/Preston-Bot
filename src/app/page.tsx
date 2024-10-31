@@ -21,6 +21,7 @@ export default function Home(): JSX.Element {
   //Handles talking to the chat GPT wrapper on the backend and this 
   //basiclly handles sending all of the messages and communicating with the server.
   const sendMessage = async () => {
+    event?.preventDefault()
     console.log(message)
     if (!message.trim()){return}    
     // adds a new message to the stream of messages.
@@ -112,8 +113,8 @@ export default function Home(): JSX.Element {
 
           })}
           </section>
-        <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8">
-          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="button" onClick={sendMessage}>
+        <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8" onSubmit={sendMessage}>
+          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="submit" onClick={(sendMessage)}>
             <h1 className="font-sans uppercase font-black text-2xl">
               Send
             </h1>
