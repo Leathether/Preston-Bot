@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
 
+let date = new Date
 
 // this is the preprompt
-let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when asked about it.`
+let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when giving an answer. Always look at the current date before answering questiions about the next week. The day is ${date}. We are in EST for out current time zone.`
 
 
 // This is the post request for Chat GPT to access the fronted server
@@ -25,7 +26,7 @@ export async function POST(req:any){
 
     // This adds the data to the preprompt
     sysPrompt = homeBody + sysPrompt
-    
+    console.log(sysPrompt)
     
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY})

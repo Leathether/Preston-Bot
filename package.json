@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "dev:python": "source /src/python/venv/bin/activate && python3 /src/python/server.py",
+    "build": "next build && cd ./src/python && source venv/bin/activate && python3 server.py",
     "start": "next start",
     "lint": "next lint"
   },
