@@ -5,9 +5,13 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:next\" \"npm run dev:flask\"",
     "dev:next": "next dev",
-    "dev:flask": "python3 ./python/server.py",
-    "build": "next build",
-    "start": "next start",
+    "dev:flask": "python3 ./src/python/server.py",
+    "build": "concurrently \"npm run build:next\" \"npm run build:flask\"",
+    "build:next": "next build",
+    "build:flask": "python3 ./src/python/server.py",
+    "start": "concurrently  \"npm run start:next\" \"npm run start:flask\"",
+    "start:next": "next build && next start",
+    "start:flask": "python3 ./src/python/server.py",
     "lint": "next lint"
   },
   "dependencies": {

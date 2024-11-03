@@ -27,5 +27,5 @@ def readPdf(name):
     return text
 
 # this currently has 2 documents
-syllabusText = readPdf("./Syllabus.pdf")
-calenderText = readPdf("./calender.pdf")
+syllabusText = readPdf("./src/python/Syllabus.pdf")
+calenderText = readPdf("./src/python/calender.pdf")
