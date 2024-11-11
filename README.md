@@ -18,11 +18,13 @@ Prereqs:
 
 1. do "pip install -r "requirements.txt"
 
-2. Do "source src/python/venv/bin/activate" in the terminal to get the virtual environment to be set up
+2. do "npm install"
 
-3. Do "npm run start" in the terminal
+3. Do "source src/python/venv/bin/activate" in the terminal to get the virtual environment to be set up
 
-4. Access the server on the public IP
+4. Do "pm2 start npm -- start" in the terminal
+
+5. Access the server on the public IP
 
 
 
