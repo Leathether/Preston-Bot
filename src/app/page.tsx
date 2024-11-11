@@ -114,12 +114,12 @@ export default function Home(): JSX.Element {
           })}
           </section>
         <form className="h-28 bg-emerald-400 rounded-b-3xl z-10 w-full flex items-center justify-end pr-8" onSubmit={sendMessage}>
-          <button className="bg-slate-700 w-[5vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="submit" onClick={(sendMessage)}>
-            <h1 className="font-sans uppercase font-black text-2xl">
+          <button className="bg-slate-700 w-[12vw] h-16 ml-8 rounded-2xl items-center justify-center mr-auto flex" type="submit" onClick={(sendMessage)}>
+            <h1 className="font-sans uppercase font-black text-2xl tracking-tighter">
               Send
             </h1>
           </button>
-          <input id="messageBar" className="bg-white rounded-full h-16 w-[56vw] pl-6 text-xl text-black" onChange={
+          <input id="messageBar" className="bg-white rounded-full h-16 w-[68vw] pl-6 text-xl text-black" onChange={
             (event) => {
             setMessage(event.target.value)
             }} value={message} />

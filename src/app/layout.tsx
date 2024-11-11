@@ -51,7 +51,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <header className="bg-cyan-900 w-screen h-[14vh] flex flex-row content-center place-items-center">
-        <Image src={Professor} alt="professor" width="100" className="w-32"></Image>
+        <Image src={Professor} alt="professor" width="100" className="w-[14vh] h-[14vh]"></Image>
         <h1 className="font-mono ml-16 text-white text-4xl">Lingustics Chatbot</h1>
       </header>
         {children}
