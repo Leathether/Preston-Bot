@@ -9,8 +9,9 @@
     "build": "concurrently \"npm run build:next\" \"npm run build:flask\"",
     "build:next": "next build",
     "build:flask": "python3 ./src/python/server.py",
-    "start": "concurrently  \"npm run start:next\" \"npm run start:flask\"",
-    "start:next": "next build && next start",
+    "start": "concurrently  \"npm run start:build\" \"npm run start:start\" \"npm run start:flask\"",
+    "start:build": "next build",
+    "start:start": "next start",
     "start:flask": "python3 ./src/python/server.py",
     "lint": "next lint"
   },
