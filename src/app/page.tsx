@@ -101,7 +101,7 @@ export default function Home(): JSX.Element {
     <>
     <div className="h-5/6 flex flex-col bg-slate-200 rounded-xl border-4 items-center">
 
-      <section className="w-2/3 bg-white flex z-5 rounded-3xl border-4 h-fit mt-8 flex flex-col">
+      <section className="w-[90vw] bg-white flex z-5 rounded-3xl border-4 h-fit mt-8 flex flex-col">
         <header className="bg-emerald-400 h-20 z-10 w-full rounded-t-3xl content-center">
           <h1 className="font-mono m-4 ml-16 text-white text-3xl ">Chat</h1>
         </header>
