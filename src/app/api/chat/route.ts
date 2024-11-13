@@ -3,10 +3,30 @@ import { NextResponse } from "next/server";
 // import open ai
 import OpenAI from "openai";
 
+
 let date = new Date
 
 // this is the preprompt
 let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is to answer questions about the Linguistics course that you teach.   Use the RAG to talk about the course and what it's contents are     Do not make up an answer, and if you do not know, then tell us.     Determine and give the current date when giving an answer. Always look at the current date before answering questiions about the next week. The day is ${date}. We are in EST for out current time zone.`
+
+const fs = require('fs');
+
+
+// Read the file content synchronously
+try {
+  const data = fs.readFileSync('training.txt', 'utf8');
+  
+  // Append the file content to the initial string
+  sysPrompt = data + sysPrompt;
+
+  // Now you have the combined string
+  console.log(sysPrompt);
+} catch (err) {
+  console.error('Error reading file:', err);
+}
+
+
+
 
 
 // This is the post request for Chat GPT to access the fronted server
@@ -15,17 +35,6 @@ let sysPrompt = `Hello, you are a professor named Preston Frash,   Your job is t
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
     const data = await req.json()
-    // This is for the pdf text and all of the training data from the python flask api.
-    let home = await fetch("http://127.0.0.1:8080/api/home")
-
-    // Get the json data from the GET request
-    home = await home.json()
-
-    // This gets the body of the data.
-    let homeBody = home.body
-
-    // This adds the data to the preprompt
-    sysPrompt = homeBody + sysPrompt
     console.log(sysPrompt)
     
     // Makes an istance of OPENAI

@@ -29,3 +29,8 @@ def readPdf(name):
 # this currently has 2 documents
 syllabusText = readPdf("./src/python/Syllabus.pdf")
 calenderText = readPdf("./src/python/calender.pdf")
+
+with open("training.txt", "a") as training:
+    training.write(syllabusText)
+    training.write(calenderText)
+    training.close()
