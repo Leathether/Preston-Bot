@@ -20,7 +20,7 @@ try {
   sysPrompt = data + sysPrompt;
 
   // Now you have the combined string
-  console.log(sysPrompt);
+
 } catch (err) {
   console.error('Error reading file:', err);
 }
@@ -35,7 +35,6 @@ try {
 export async function POST(req:any){
     // Use request.json() to parse the incoming JSON body
     const data = await req.json()
-    console.log(sysPrompt)
     
     // Makes an istance of OPENAI
     const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY})
@@ -46,7 +45,7 @@ export async function POST(req:any){
         // This gives the system prompt and any qestions after it.
         messages:[{role:'assistant', content:sysPrompt}, ...data],
         // Sets the model
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         stream: true,
     })
 
